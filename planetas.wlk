@@ -9,15 +9,9 @@ class Planeta {
     construcciones.add(unaConstruccion)
   }
   method delegacionDiplomatica() {
-    return 
-        if(self.personasDestacadas().contains(self.habianteConMasRecursos())){
-            self.personasDestacadas()
-        }
-        else{
-            self.personasDestacadas() ++ [self.habianteConMasRecursos()]
-        }
+    return if(self.personasDestacadas().contains(self.habitanteConMasRecursos())) self.personasDestacadas() else self.personasDestacadas() + [self.habitanteConMasRecursos()]
   }
   method personasDestacadas() = personas.filter({c => c.esDestacada()})
-  method habianteConMasRecursos() = personas.max({c => c.recursos()})  
-  method esValioso() = construcciones.sum({c => c.valor()}) 
+  method habitanteConMasRecursos() = personas.max({c => c.recursos()})  
+  method esValioso() = construcciones.sum({c => c.valor()}) > 100
 }

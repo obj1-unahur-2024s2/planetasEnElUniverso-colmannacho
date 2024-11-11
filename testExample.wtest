@@ -3,24 +3,46 @@ import planetas.*
 import personas.*
 
 describe "Prueba 1" {
-  //PLANETA
+  //PLANETAS
   const planeta1 = new Planeta()
+  const planeta2 = new Planeta()
   //PERSONAS
-  const juan = new Persona(edad = 23)
-  const milagros = new Persona(edad = 5)
-  const paula = new Persona(edad = 45)
-  const marcelo = new Persona(edad = 59)
+  const ramiro = new Persona(edad = 2)
+  const milagros = new Persona(edad = 24)
+  const paula = new Persona(edad = 52)
+  const marcelo = new Persona(edad = 63)
   //MURALLAS
   const muralla1 = new Muralla(longitud = 50)
   const muralla2 = new Muralla(longitud = 24)
+  const muralla3 = new Muralla(longitud = 9)
   //MUSEO
   const museo1 = new Museo(superficieCubierta = 30,indiceImportancia = 4)
 
   method initialize() {
+    planeta1.agregarPersona(ramiro)
+    planeta1.agregarPersona(milagros)
+    planeta1.agregarPersona(paula)
+    planeta1.agregarPersona(marcelo)
+    planeta1.agregarConstruccion(muralla1)
+    planeta1.agregarConstruccion(muralla2)
+    planeta1.agregarConstruccion(museo1)
+  }
+  test "Si ramiro gasta 5 monedas y paula gana 3, la delegación diplomática está formada por tres personas y su habitante con mas recursos es Paula" {
+    ramiro.gastarMonedas(5)
+    paula.ganarMonedas(3)
     
+    assert.equals(3,planeta1.delegacionDiplomatica().size())
+    assert.equals(paula,planeta1.habitanteConMasRecursos())
   }
-  test "la delegación diplomática está formada por tres personas" {
-    assert.equals(100, pepita.energy())
+  test "El planeta 1 es valioso" {
+    assert.that(planeta1.esValioso())
   }
+  test "Si marcelo cumple 2 veces años, deja de formar parte de la delegaciòn diplomatica" {
+    assert.that(planeta1.delegacionDiplomatica().contains(marcelo))
 
+    marcelo.cumplirAnios()
+    marcelo.cumplirAnios()
+
+    assert.notThat(planeta1.delegacionDiplomatica().contains(marcelo))
+  }
 }
