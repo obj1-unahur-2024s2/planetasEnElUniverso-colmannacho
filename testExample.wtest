@@ -1,8 +1,25 @@
-import example.pepita
+import construcciones.*
+import planetas.*
+import personas.*
 
-describe "group of tests for pepita" {
+describe "Prueba 1" {
+  //PLANETA
+  const planeta1 = new Planeta()
+  //PERSONAS
+  const juan = new Persona(edad = 23)
+  const milagros = new Persona(edad = 5)
+  const paula = new Persona(edad = 45)
+  const marcelo = new Persona(edad = 59)
+  //MURALLAS
+  const muralla1 = new Muralla(longitud = 50)
+  const muralla2 = new Muralla(longitud = 24)
+  //MUSEO
+  const museo1 = new Museo(superficieCubierta = 30,indiceImportancia = 4)
 
-  test "pepita has initial energy" {
+  method initialize() {
+    
+  }
+  test "la delegación diplomática está formada por tres personas" {
     assert.equals(100, pepita.energy())
   }
 
