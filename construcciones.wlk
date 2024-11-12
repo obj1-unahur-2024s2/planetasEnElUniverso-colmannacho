@@ -1,12 +1,9 @@
-class Construccion{
-    method valor() 
-}
-class Muralla inherits Construccion {
+class Muralla {
   const property longitud
-  override method valor() = longitud * 10 
+  method valor() = longitud * 10 
 }
-class Museo inherits Construccion {
+class Museo {
   const property superficieCubierta
   const property indiceImportancia
-  override method valor() = superficieCubierta * indiceImportancia 
+  method valor() = superficieCubierta * indiceImportancia 
 }
