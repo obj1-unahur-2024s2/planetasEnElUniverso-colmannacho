@@ -1,5 +1,6 @@
+import personas.*
 class Planeta {
-  const personas = []
+  const property personas = []
   const construcciones = []
   
   method agregarPersona(unaPersona) {

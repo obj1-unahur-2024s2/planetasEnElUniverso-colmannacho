@@ -26,6 +26,10 @@ describe "Prueba 1" {
     planeta1.agregarConstruccion(muralla1)
     planeta1.agregarConstruccion(muralla2)
     planeta1.agregarConstruccion(museo1)
+    
+    planeta2.agregarPersona(marcelo)
+    planeta2.agregarPersona(paula)
+    planeta2.agregarConstruccion(muralla3)
   }
   test "Si ramiro gasta 5 monedas y paula gana 3, la delegación diplomática está formada por tres personas y su habitante con mas recursos es Paula" {
     ramiro.gastarMonedas(5)
@@ -37,12 +41,61 @@ describe "Prueba 1" {
   test "El planeta 1 es valioso" {
     assert.that(planeta1.esValioso())
   }
-  test "Si marcelo cumple 2 veces años, deja de formar parte de la delegaciòn diplomatica" {
+  test "Si marcelo cumple 3 veces años, deja de formar parte de la delegacion diplomatica" {
     assert.that(planeta1.delegacionDiplomatica().contains(marcelo))
 
     marcelo.cumplirAnios()
     marcelo.cumplirAnios()
+    marcelo.cumplirAnios()
 
     assert.notThat(planeta1.delegacionDiplomatica().contains(marcelo))
+  }
+  test "El planeta 2 no es valioso" {
+    assert.notThat(planeta2.esValioso())
+  }
+}
+describe "Prueba 2" {
+  //PLANETAS
+  const planeta1 = new Planeta()
+  const planeta2 = new Planeta()
+  //CONSTRUCTORES
+  const bob = new Constructor(edad = 30,region = "rocosa",inteligencia = 7)
+  const pedro = new Constructor(edad = 54,region = "llanura",inteligencia = 0)
+  const many = new Constructor(edad = 15,region = "montaña",inteligencia = 10)
+  //PRODUCTORES
+  const macho = new Productor(edad = 30)
+  method initialize() {
+    planeta1.agregarPersona(bob)
+    planeta1.agregarPersona(pedro)
+    planeta1.agregarPersona(many)
+    planeta1.agregarPersona(macho)
+  }
+  test "Macho es una persona destacada y sus recursos son 20. Si aprende la tecnica riego, sus recursos pasarian a ser 40" {
+    assert.that(macho.esDestacada())
+    assert.equals(20,macho.recursos())
+
+    macho.aprender("riego")
+
+    assert.equals(40,macho.recursos())
+  }
+  test "Si macho realiza la tecnica cosecha por un tiempo de 3, pierde una unidad de recurso y queda en 19" {
+    macho.realizarTecnica("cosecha",3)
+
+    assert.equals(19,macho.recursos())
+  }
+  test "Si macho realiza la tecnica cultivo por un tiempo de 5, sus recursos quedan en 35" {
+    macho.realizarTecnica("cultivo",5)
+
+    assert.equals(35,macho.recursos())
+  }
+  test "Si macho trabaja en el planeta 2 un tiempo de 4, sus recursos no se modifican ya que no pertence a ese planeta" {
+    macho.trabajarEn_Durante_(planeta2,4)
+
+    assert.equals(20,macho.recursos())
+  }
+  test "Si macho trabaja en el planeta 2 un tiempo de 2, sus recursos quedan en 26"{
+    macho.trabajarEn_Durante_(planeta1,2)
+
+    assert.equals(26,macho.recursos())
   }
 }
