@@ -20,6 +20,7 @@ class Persona{
 class Productor inherits Persona{
   const tecnicas = []
   method initialize(){
+    tecnicas.clear()
     tecnicas.add("cultivo")
   }
   override method recursos() = super() * tecnicas.size()
@@ -69,7 +70,7 @@ class Constructor inherits Persona{
         unPlaneta.agregarConstruccion(new Muralla(longitud = 50))
       }
       else{
-        unPlaneta.agregarConstruccion(new Muralla (longitud = 10))
+        unPlaneta.agregarConstruccion(new Muralla (longitud = 100 / tiempo))
       }
     }
   }

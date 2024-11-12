@@ -1,7 +1,6 @@
-import personas.*
 class Planeta {
   const property personas = []
-  const construcciones = []
+  const property construcciones = []
   
   method agregarPersona(unaPersona) {
     personas.add(unaPersona)
@@ -15,4 +14,11 @@ class Planeta {
   method personasDestacadas() = personas.filter({c => c.esDestacada()})
   method habitanteConMasRecursos() = personas.max({c => c.recursos()})  
   method esValioso() = construcciones.sum({c => c.valor()}) > 100
+
+  method ordenarTrabajarADelegacionDurante_(cantidadTiempo) {
+    self.delegacionDiplomatica().forEach({c => c.trabajarEn_Durante_(self,cantidadTiempo)})
+  }
+  method invadir_Durante_(unPlaneta,cantidadTiempo) {
+    unPlaneta.ordenarTrabajarADelegacionDurante_(cantidadTiempo)
+  }
 }

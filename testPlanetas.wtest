@@ -61,7 +61,7 @@ describe "Prueba 2" {
   //CONSTRUCTORES
   const bob = new Constructor(edad = 30,region = "rocosa",inteligencia = 7)
   const pedro = new Constructor(edad = 54,region = "llanura",inteligencia = 0)
-  const many = new Constructor(edad = 15,region = "montaña",inteligencia = 10)
+  const many = new Constructor(edad = 15,region = "costa",inteligencia = 10)
   //PRODUCTORES
   const macho = new Productor(edad = 30)
   method initialize() {
@@ -97,5 +97,45 @@ describe "Prueba 2" {
     macho.trabajarEn_Durante_(planeta1,2)
 
     assert.equals(26,macho.recursos())
+  }
+  test "Si bob trabaja en el planeta 2 en tiempo 4, sus recursos quedan en 25 y el planeta 2 va tener una muralla de longitud 25" {
+    bob.trabajarEn_Durante_(planeta2, 4)
+
+    assert.equals(25,bob.recursos())
+    assert.equals(1,planeta2.construcciones().size())
+    assert.equals(25,planeta2.construcciones().first().longitud())
+  }
+  test "Pedro, Bob y Many no son personas destacadas" {
+    assert.notThat(pedro.esDestacada())
+    assert.notThat(bob.esDestacada())
+    assert.notThat(many.esDestacada())
+  }
+  test "Si pedro trabaja en el planeta 1 en tiempo 3, sus recursos quedan en 25 y el planeta 1 va tener una muralla de longitud 1.5" {
+    pedro.trabajarEn_Durante_(planeta1, 3)
+
+    assert.equals(25,pedro.recursos())
+    assert.equals(1,planeta1.construcciones().size())
+    assert.equals(1.5,planeta1.construcciones().first().longitud())
+  }
+  test "Si many trabaja en el planeta 1 en tiempo 8, sus recursos quedan en 25 y el planeta 1 va tener un museo con una superficie de 8 y un nivel de 1 " {
+    many.trabajarEn_Durante_(planeta1, 8)
+
+    assert.equals(25,many.recursos())
+    assert.equals(1,planeta1.construcciones().size())
+    assert.equals(8,planeta1.construcciones().first().superficieCubierta())
+    assert.equals(1,planeta1.construcciones().first().indiceImportancia())
+  }
+  test "Si macho realiza la tecnica cultivo, la delegacion diplomatica solo está compuesta por el" {
+    macho.realizarTecnica("cultivo",1)
+    assert.equals([macho],planeta1.delegacionDiplomatica())
+  }
+  test "Si bob trabaja en cualquier planeta 5 veces pasaría a formar parte de la delegacion junto con macho" {
+    bob.trabajarEn_Durante_(planeta1,1)
+    bob.trabajarEn_Durante_(planeta2,1)
+    bob.trabajarEn_Durante_(planeta2,1)
+    bob.trabajarEn_Durante_(planeta1,1)
+    bob.trabajarEn_Durante_(planeta1,1)
+
+    assert.equals([macho,bob],planeta1.delegacionDiplomatica())
   }
 }
